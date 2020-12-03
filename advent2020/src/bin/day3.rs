@@ -1,13 +1,9 @@
 use std::env;
 use std::fs;
 
-struct Grid {
-    rows: usize,
-    tree_grid: Vec<Vec<bool>>
-}
+type Grid = Vec<Vec<bool>>;
 
-fn parse_grid(contents: &str) -> Grid {
-    let mut rows = 0;
+fn parse_grid(contents: &str) -> Vec<Vec<bool>> {
     let mut tree_grid = Vec::new();
     for row in contents.lines() {
         let mut tree_row = Vec::new();
@@ -19,9 +15,8 @@ fn parse_grid(contents: &str) -> Grid {
             }
         }
         tree_grid.push(tree_row);
-        rows += 1;
     }
-    Grid {rows, tree_grid}
+    tree_grid
 }
 
 fn count_collisions(grid: &Grid, row_delta: usize, col_delta: usize) -> i64 {
@@ -29,9 +24,9 @@ fn count_collisions(grid: &Grid, row_delta: usize, col_delta: usize) -> i64 {
     let mut cur_col = 0;
 
     let mut collisions = 0;
-    while cur_row < grid.rows {
-        let mod_col = cur_col % grid.tree_grid[cur_row].len(); 
-        if grid.tree_grid[cur_row][mod_col] {
+    while cur_row < grid.len() {
+        let mod_col = cur_col % grid[cur_row].len(); 
+        if grid[cur_row][mod_col] {
             collisions += 1;
         }
         cur_row += row_delta;
