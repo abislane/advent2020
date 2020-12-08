@@ -110,8 +110,8 @@ fn main() {
     let bags = parse_bags(&contents);
 
     let result1 = part1(&bags);
-    println!("{}", result1);
+    println!("Part 1 answer: {}", result1);
 
     let result2 = part2(&bags);
-    println!("{}", result2);
+    println!("Part 2 answer: {}", result2);
 }
